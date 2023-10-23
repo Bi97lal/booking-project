@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logoImage from '../src/image/2 (1).png';
-import educatorImage from '../src/image/undraw_educator_re_ju47.svg';
-
+import logoImage from '../image/2 (1).png';
+import educatorImage from '../image/undraw_educator_re_ju47.svg';
 
 
 import { useQuery } from 'react-query';
@@ -132,7 +131,7 @@ const styles = {
 };
 
 async function fetchUserData() {
-  const response = await fetch('https://api.example.com/user'); // Replace with your API endpoint
+  const response = await fetch('/get_courses/'); // Replace with your API endpoint
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }

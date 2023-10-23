@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import logoImage from '../src/image/2 (1).png';
+import logoImage from '../image/2 (1).png';
+
+
+
 
 const styles = {
   header: {
@@ -94,7 +97,7 @@ const Home = () => {
 
   useEffect(() => {
     // Fetch the list of courses from your API or data source
-    fetch('YOUR_COURSES_API_URL') // Replace with your actual API endpoint
+    fetch('/get_courses/') // Replace with your actual API endpoint
       .then((response) => response.json())
       .then((data) => {
         setCourses(data);

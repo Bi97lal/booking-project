@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import logoImage from '../src/image/2 (1).png';
-import circit1Image from '../src/image/undraw_hello_re_3evm.svg';
-import circit2Image from '../src/image/undraw_freelancer_re_irh4.svg';
-import circitImage from '../src/image/undraw_proud_coder_re_exuy.svg';
+import logoImage from '../image/2 (1).png';
+import circit1Image from '../image/undraw_hello_re_3evm.svg';
+import circit2Image from '../image/undraw_freelancer_re_irh4.svg';
+import circitImage from '../image/undraw_proud_coder_re_exuy.svg';
 
 const styles = {
   body: {
