@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logoImage from '../image/2 (1).png';
-
-
-
+import programmingImage from '../image/undraw_programming_re_kg9v.svg';
 
 const styles = {
   header: {
@@ -17,6 +15,7 @@ const styles = {
     right: '0',
     zIndex: '1',
   },
+  
   headerImg: {
     width: '180px',
     height: 'auto',
@@ -51,11 +50,10 @@ const styles = {
     borderRadius: '25px',
     position: 'relative',
   },
-  boxText: {
-    textAlign: 'justify',
+  coursesContainer: {
     display: 'flex',
-    justifyContent: 'flex-start',
-    margin: '0',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
   nestedBox: {
     width: '297px',
@@ -97,7 +95,7 @@ const Home = () => {
 
   useEffect(() => {
     // Fetch the list of courses from your API or data source
-    fetch('/get_courses/') // Replace with your actual API endpoint
+    fetch('http://127.0.0.1:8000/booking/get_courses/') // Replace with your actual API endpoint
       .then((response) => response.json())
       .then((data) => {
         setCourses(data);
@@ -118,19 +116,37 @@ const Home = () => {
       <div style={styles.header}>
         <img src={logoImage} alt="Your Logo" style={styles.headerImg} />
       </div>
+
       <div style={styles.container}>
-        {courses.map((course) => (
-          <div key={course.id} style={styles.nestedBox}>
-            <img src={course.image} alt={course.title} style={{ width: '100%', maxHeight: '200px' }} />
-            <p style={{ fontWeight: 'bold', fontSize: '22.8px' }}>{course.title}</p>
-            <p style={{ fontWeight: 'bold' }}>{course.description}</p>
-            <div style={styles.buttonContainer}>
-              <Link to={`/courses/${course.id}`} className="nested-box-button">
-                Details
-              </Link>
+        <div style={styles.text}>
+          <p style={{ fontWeight: 'bold', fontSize: '46.29px', color: '#1A8CF7' }}>Get started now!</p>
+          <p style={{ fontWeight: 'bold' }}>Ready to embark on an exciting learning journey with us? 🚀</p>
+          <p style={{ color: '#303030', fontSize: '32px' }}><strong>HUB200</strong></p>
+          <p style={{ fontWeight: 'bold' }}>has never been easier.</p>
+        </div>
+        <div style={styles.photo}>
+          <img src={programmingImage} alt="Your Image Description" />
+        </div>
+      </div>
+
+      <div style={styles.box}>
+        <div style={styles.coursesContainer}>
+          {courses.map((course) => (
+            <div key={course.id} style={styles.nestedBox}>
+              <img src={course.image} alt={course.title} style={{ width: '100%', maxHeight: '200px' }} />
+              <p style={{ fontWeight: 'bold', fontSize: '22.8px' }}>{course.title}</p>
+              <p style={{ fontWeight: 'bold' }}>{course.description}</p>
+              <div style={styles.buttonContainer}>
+                <Link to={`/courses/${course.id}`} className="nested-box-button">
+                  Details
+                </Link>
+                <Link to={`/courses/${course.id}/booking`} className="nested-box-button">
+                  Booking
+                </Link>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import logoImage from '../image/2 (1).png';
 import educatorImage from '../image/undraw_educator_re_ju47.svg';
 
-
 import { useQuery } from 'react-query';
 
 const styles = {
@@ -131,7 +130,7 @@ const styles = {
 };
 
 async function fetchUserData() {
-  const response = await fetch('/get_courses/'); // Replace with your API endpoint
+  const response = await fetch('http://127.0.0.1:8000/booking/post_student/');
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
@@ -152,6 +151,12 @@ function BookingForm() {
   // Once data is loaded, you can access it here
   const userData = data;
 
+  // Handle form submission
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // You can send the data to your Django API here for processing
+  };
+
   return (
     <div style={styles.body} className="booking-form">
       <div style={styles.header}>
@@ -162,31 +167,39 @@ function BookingForm() {
       <div style={styles.box}>
         <div style={styles.leftHalf}>
           <img src={logoImage} alt="Logo" style={styles.logo} />
-          <div style={styles.registrationForm}>
-            <label htmlFor="firstName" style={styles.registrationFormLabel}>First Name:</label>
-            <input type="text" id="firstName" name="firstName" required style={styles.registrationFormInput} value={userData.firstName} />
+          <form onSubmit={handleSubmit}>
+            <div style={styles.registrationForm}>
+              <label htmlFor="firstName" style={styles.registrationFormLabel}>
+                First Name:
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                required
+                style={styles.registrationFormInput}
+                value={userData.firstName}
+              />
 
-            <label htmlFor="lastName" style={styles.registrationFormLabel}>Last Name:</label>
-            <input type="text" id="lastName" name="lastName" required style={styles.registrationFormInput} value={userData.lastName} />
+              <label htmlFor="lastName" style={styles.registrationFormLabel}>
+                Last Name:
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                required
+                style={styles.registrationFormInput}
+                value={userData.lastName}
+              />
 
-            <label htmlFor="email" style={styles.registrationFormLabel}>Email:</label>
-            <input type="email" id="email" name="email" required style={styles.registrationFormInput} value={userData.email} />
+              {/* Include other form fields and radio buttons here */}
 
-            <label htmlFor="number" style={styles.registrationFormLabel}>Number:</label>
-            <input type="tel" id="number" name="number" required style={styles.registrationFormInput} value={userData.number} />
-
-            <label htmlFor="city" style={styles.registrationFormLabel}>City:</label>
-            <input type="text" id="city" name="city" required style={styles.registrationFormInput} value={userData.city} />
-
-            <label htmlFor="gender" style={styles.registrationFormLabel}>Gender:</label>
-            <div style={styles.radioGroup}>
-              <input type="radio" id="male" name="gender" value="male" required />
-              <label htmlFor="male" style={styles.radioGroupLabel}>Male</label>
-              <input type="radio" id="female" name="gender" value="female" required />
-              <label htmlFor="female" style={styles.radioGroupLabel}>Female</label>
+              <button type="submit" className="submit-button" style={styles.submitButton}>
+                <strong>Done</strong>
+              </button>
             </div>
-            <button type="submit" className="submit-button" style={styles.submitButton}><strong>Done</strong></button>
-          </div>
+          </form>
         </div>
         <div style={styles.rightHalf}>
           <div style={styles.circle1}></div>

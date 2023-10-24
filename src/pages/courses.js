@@ -20,6 +20,12 @@ const styles = {
     right: 0,
     zIndex: 1,
   },
+  headerImg: {
+    width: '180px',
+    height: 'auto',
+    marginRight: '10px',
+  },
+  
   rectangl1: {
     width: '1200px',
     height: '700px',
@@ -95,6 +101,11 @@ const styles = {
     color: '#fff',
     textAlign: 'center',
     border: 'none',
+    position: 'absolute',
+    bottom: '20px',  // Adjust the positioning to place it at the bottom
+    left: '50%',
+    transform: 'translateX(-50%)',
+    width: '80%',  // Adjust the width as needed
   },
 };
 
@@ -119,15 +130,21 @@ function Course() {
     },
   };
 
-  const course = courseData[id];
+  // Check if the provided ID exists in courseData; if not, provide a default course
+  const course = courseData[id] || {
+    title: 'Course Not Found',
+    description: 'The requested course does not exist.',
+    image: '', // You can provide a default image here
+  };
 
   return (
     <div style={styles.body}>
       <div style={styles.header}>
-        <Link to="/">
-          <img src={logoImage} alt="Your Logo" />
-        </Link>
+         <Link to="/">
+           <img src={logoImage} alt="Your Logo" style={{ width: '100px', height: 'auto' }} />
+       </Link>
       </div>
+
       <div style={styles.rectangl1}>
         <div className="button-container">
           <button className="nested-box-button">
