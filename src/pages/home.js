@@ -53,7 +53,7 @@ const styles = {
   coursesContainer: {
     display: 'flex',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    //justifyContent: 'space-between',
   },
   nestedBox: {
     width: '297px',
@@ -98,6 +98,7 @@ const Home = () => {
     fetch('http://127.0.0.1:8000/booking/get_courses/') // Replace with your actual API endpoint
       .then((response) => response.json())
       .then((data) => {
+        console.log('Fetched courses data:', data);
         setCourses(data);
         setLoading(false);
       })

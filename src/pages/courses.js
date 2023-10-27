@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import logoImage from '../image/2 (1).png';
+import logoImage from '../image/2 (1).png'; 
 import circit1Image from '../image/undraw_hello_re_3evm.svg';
 import circit2Image from '../image/undraw_freelancer_re_irh4.svg';
 import circitImage from '../image/undraw_proud_coder_re_exuy.svg';
@@ -111,7 +111,7 @@ const styles = {
 
 function Course() {
   const { id } = useParams();
-
+  console.log('Course ID:', id);
   const courseData = {
     frontend: {
       title: 'Front-End Developer',
@@ -128,8 +128,9 @@ function Course() {
       description: 'Dive into web app development with Python, JavaScript, and more...',
       image: circitImage,
     },
+    
   };
-
+  console.log('Course Data:', courseData[id]);
   // Check if the provided ID exists in courseData; if not, provide a default course
   const course = courseData[id] || {
     title: 'Course Not Found',
@@ -141,7 +142,7 @@ function Course() {
     <div style={styles.body}>
       <div style={styles.header}>
          <Link to="/">
-           <img src={logoImage} alt="Your Logo" style={{ width: '100px', height: 'auto' }} />
+           <img src={logoImage} alt="Your Logo"  style={styles.headerImg} />
        </Link>
       </div>
 

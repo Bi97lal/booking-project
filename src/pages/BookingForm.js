@@ -130,12 +130,22 @@ const styles = {
 };
 
 async function fetchUserData() {
-  const response = await fetch('http://127.0.0.1:8000/booking/post_student/');
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
+  try {
+    const response = await fetch('http://127.0.0.1:8000/booking/post_student/', {
+      method: 'POST', // Use the correct method
+      // ...other options and request data...
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    throw new Error(`Fetch error: ${error.message}`);
   }
-  return response.json();
 }
+
 
 function BookingForm() {
   const { data, isLoading, error } = useQuery('userData', fetchUserData);
@@ -148,13 +158,13 @@ function BookingForm() {
     return <div>Error: {error.message}</div>;
   }
 
-  // Once data is loaded, you can access it here
+  // Once data is loaded, can access here
   const userData = data;
 
   // Handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
-    // You can send the data to your Django API here for processing
+    //  send the data to  Django API  for processing
   };
 
   return (
