@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logoImage from '../image/2 (1).png';
 import educatorImage from '../image/undraw_educator_re_ju47.svg';
-
+ 
 import { useQuery } from 'react-query';
 
 const styles = {
@@ -130,6 +130,7 @@ const styles = {
 };
 
 async function fetchUserData() {
+  alert(1)
   try {
     const response = await fetch('http://127.0.0.1:8000/booking/post_student/', {
       method: 'POST', // Use the correct method
@@ -148,24 +149,48 @@ async function fetchUserData() {
 
 
 function BookingForm() {
-  const { data, isLoading, error } = useQuery('userData', fetchUserData);
+ 
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+ 
+ 
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    // Add more fields as needed
+  });
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-  // Once data is loaded, can access here
-  const userData = data;
-
-  // Handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    //  send the data to  Django API  for processing
+    // Update formData based on the "name" attribute of the input field
+    setFormData({ ...formData, [name]: value });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch('http://127.0.0.1:8000/booking/post_student/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+       
+        console.log(data)
+        console.log(data.data.firstName); 
+        console.log(data.data.lastName); 
+    }) 
+  
+      .catch((error) => {
+        // Handle network or other errors here
+      });
+  };
+
+
+
+
 
   return (
     <div style={styles.body} className="booking-form">
@@ -186,10 +211,11 @@ function BookingForm() {
                 type="text"
                 id="firstName"
                 name="firstName"
+                onChange={handleChange}
+
                 required
                 style={styles.registrationFormInput}
-                value={userData.firstName}
-              />
+               />
 
               <label htmlFor="lastName" style={styles.registrationFormLabel}>
                 Last Name:
@@ -198,10 +224,11 @@ function BookingForm() {
                 type="text"
                 id="lastName"
                 name="lastName"
+                onChange={handleChange}
+
                 required
                 style={styles.registrationFormInput}
-                value={userData.lastName}
-              />
+               />
 
               {/* Include other form fields and radio buttons here */}
 

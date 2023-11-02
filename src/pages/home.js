@@ -98,6 +98,7 @@ const Home = () => {
     fetch('http://127.0.0.1:8000/booking/get_courses/') // Replace with your actual API endpoint
       .then((response) => response.json())
       .then((data) => {
+        
         console.log('Fetched courses data:', data);
         setCourses(data);
         setLoading(false);
@@ -135,8 +136,9 @@ const Home = () => {
           {courses.map((course) => (
             <div key={course.id} style={styles.nestedBox}>
               <img src={course.image} alt={course.title} style={{ width: '100%', maxHeight: '200px' }} />
-              <p style={{ fontWeight: 'bold', fontSize: '22.8px' }}>{course.title}</p>
-              <p style={{ fontWeight: 'bold' }}>{course.description}</p>
+              <p style={{ fontWeight: 'bold', fontSize: '22.8px' }}>{course.name}</p>
+              <p style={{ fontWeight: 'bold' }}>{course.Description}</p>
+              <img src={ course.img }/>
               <div style={styles.buttonContainer}>
                 <Link to={`/courses/${course.id}`} className="nested-box-button">
                   Details
