@@ -122,9 +122,9 @@ const Home = () => {
       <div style={styles.container}>
         <div style={styles.text}>
           <p style={{ fontWeight: 'bold', fontSize: '46.29px', color: '#1A8CF7' }}>Get started now!</p>
-          <p style={{ fontWeight: 'bold' }}>Ready to embark on an exciting learning journey with us? 🚀</p>
-          <p style={{ color: '#303030', fontSize: '32px' }}><strong>HUB200</strong></p>
-          <p style={{ fontWeight: 'bold' }}>has never been easier.</p>
+          <p style={{ fontWeight: 'bold',margin:0 }}>Ready to embark on an exciting learning journey with us? 🚀</p>
+          <p style={{ color: '#303030', fontSize: '32px',margin:0 }}><strong>HUB200</strong></p>
+          <p style={{ fontWeight: 'bold',margin:0 }}>has never been easier.</p>
         </div>
         <div style={styles.photo}>
           <img src={programmingImage} alt="Your Image Description" />

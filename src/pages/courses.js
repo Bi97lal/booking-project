@@ -1,4 +1,6 @@
-import React from 'react';
+
+import React, { useState, useEffect } from 'react';
+
 import { Link, useParams } from 'react-router-dom';
 import logoImage from '../image/2 (1).png'; 
 import circit1Image from '../image/undraw_hello_re_3evm.svg';
@@ -111,39 +113,33 @@ const styles = {
 
 function Course() {
   const { id } = useParams();
-  console.log('Course ID:', id);
-  const courseData = {
-    frontend: {
-      title: 'Front-End Developer',
-      description: 'Your front-end journey starts here...',
-      image: circit2Image,
-    },
-    ccna: {
-      title: 'CCNA 2023',
-      description: 'Learn the key features of computer networks...',
-      image: circit1Image,
-    },
-    web50x: {
-      title: 'Web50X',
-      description: 'Dive into web app development with Python, JavaScript, and more...',
-      image: circitImage,
-    },
-    
-  };
-  console.log('Course Data:', courseData[id]);
-  // Check if the provided ID exists in courseData; if not, provide a default course
-  const course = courseData[id] || {
-    title: 'Course Not Found',
-    description: 'The requested course does not exist.',
-    image: '', // You can provide a default image here
-  };
+  const [courseData, setCourseData] = useState(null);
+  useEffect(() => {
+    fetch(`http://127.0.0.1:8000/booking/get_details/${id}/`) // Replace with your actual API endpoint
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.course) {
+          const course = JSON.parse(data.course)[.0].fields;
+          setCourseData(course);
+        } else {
+          console.log('Data not found');
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching courses: ', error);
+      });
+  }, [id]);
+
+
+
+  if (courseData) {
 
   return (
     <div style={styles.body}>
       <div style={styles.header}>
-         <Link to="/">
-           <img src={logoImage} alt="Your Logo"  style={styles.headerImg} />
-       </Link>
+        <Link to="/">
+          <img src={logoImage} alt="Your Logo" style={styles.headerImg} />
+        </Link>
       </div>
 
       <div style={styles.rectangl1}>
@@ -156,21 +152,28 @@ function Course() {
         </div>
         <div style={styles.rectangl2}>
           <div style={styles.textStyles1}>
-            <p>{course.title}</p>
-            <p>{course.description}</p>
+          <p>This {courseData.coursesName}</p>
+            <p>{courseData.Description}</p>
           </div>
         </div>
         <div style={styles.circleStyles1}>
           <div style={styles.circleStyles2}>
-            <img src={course.image} alt={course.title} />
+            <img src={courseData.image} alt={courseData.title} />
             <div style={styles.textStyles2}>
-              <p>{course.title}</p>
+              {/* <p>{course.title}</p> */}
             </div>
           </div>
         </div>
       </div>
     </div>
   );
+}else
+{
+  return <div>Loading...</div>; // You can replace this with a loading indicator or other content while data is being fetched.
+
+
+
+}
 }
 
 export default Course;

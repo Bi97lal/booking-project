@@ -156,6 +156,9 @@ function BookingForm() {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
+    email:'',
+    phone:'',
+    age:'',
     // Add more fields as needed
   });
 
@@ -179,13 +182,19 @@ function BookingForm() {
     .then((data) => {
        
         console.log(data)
-        console.log(data.data.firstName); 
-        console.log(data.data.lastName); 
+        console.log(data.data.firstName);
+        console.log(data.data.lastName);
+        console.log(data.data.email);
+        console.log(data.data.phone);
+        console.log(data.data.age);
+ 
     }) 
+    
   
       .catch((error) => {
         // Handle network or other errors here
       });
+      
   };
 
 
@@ -229,6 +238,43 @@ function BookingForm() {
                 required
                 style={styles.registrationFormInput}
                />
+                <label htmlFor="email" style={styles.registrationFormLabel}>
+                email:
+              </label>
+              <input
+                type="text"
+                id="email"
+                name="email"
+                onChange={handleChange}
+
+                required
+                style={styles.registrationFormInput}
+               />
+               <label htmlFor="phone" style={styles.registrationFormLabel}>
+               phone:
+              </label>
+              <input
+                type="number"
+                id="phone"
+                name="phone"
+                onChange={handleChange}
+
+                required
+                style={styles.registrationFormInput}
+               />
+                <label htmlFor="age" style={styles.registrationFormLabel}>
+               age:
+              </label>
+              <input
+                type="number"
+                id="age"
+                name="age"
+                onChange={handleChange}
+
+                required
+                style={styles.registrationFormInput}
+               />
+
 
               {/* Include other form fields and radio buttons here */}
 
